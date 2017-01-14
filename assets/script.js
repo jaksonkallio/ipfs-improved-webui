@@ -14,6 +14,8 @@ function buildListItem(file_key, pin_type){
     url: httpFileUrl(file_key),
     success: function(data, textstatus, request){
       var content_type_raw = request.getResponseHeader('Content-Type');
+
+      console.log(content_type_raw);
     }
   }); 
 }
