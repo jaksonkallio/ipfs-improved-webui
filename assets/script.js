@@ -10,13 +10,21 @@ function buildListItem(key, pin_type){
   console.log("Key: "+key+" - Pin Type: "+pin_type);
 }
 
+function getFileType(file_key){
+  
+}
+
+function httpFileUrl(file_key){
+  return "http://localhost:8080/ipfs/"+file_key;
+}
+
 $(document).ready(function(){
   listPinned();
-  $.ajax({
+  /*$.ajax({
     type: 'GET',
     url: 'http://i.imgur.com/cx5wqZ3.jpg',
     success: function(data, textStatus, request){
       alert(request.getResponseHeader('Content-Type'));
     }
-  });
+  });*/
 });
