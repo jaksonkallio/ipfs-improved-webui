@@ -11,5 +11,13 @@ function buildListItem(key, pin_type){
 }
 
 $(document).ready(function(){
-  listPinned();  
+  listPinned();
+  $.ajax({
+    type: 'GET',
+    url: 'http://i.imgur.com/cx5wqZ3.jpg',
+    data: formData,
+    success: function(data, textStatus, request){
+      alert(request.getResponseHeader('Content-Type'));
+    }
+  });
 });
