@@ -6,12 +6,20 @@ function listPinned(){
   });
 }
 
-function buildListItem(key, pin_type){
+function buildListItem(file_key, pin_type){
   console.log("Key: "+key+" - Pin Type: "+pin_type);
+
+  $.ajax({
+    type: 'GET',
+    url: httpFileUrl(file_key),
+    success: function(data, textstatus, request){
+      var content_type_raw = request.getResponseHeader('Content-Type');
+    }
+  }); 
 }
 
-function getFileType(file_key){
-  
+function updateItemPreview(file_key, content_type){
+
 }
 
 function httpFileUrl(file_key){
