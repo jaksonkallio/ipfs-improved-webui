@@ -5,5 +5,5 @@ function listPinned(){
 }
 
 $(document).ready(function(){
-  
+  listPinned();  
 });
