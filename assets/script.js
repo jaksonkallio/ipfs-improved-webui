@@ -30,7 +30,17 @@ function buildListItem(file_key, pin_type){
       
       }
     }
-  }); 
+  });
+
+  var preview_item = $(`
+    <div class="item" data-file-key="`+file_key+`">
+      <div class="thumbnail"></div>
+      <a class="details">File Details</a>
+    </div>
+  `);
+
+  $("#file-list").html('');
+  $("#file-list").append(preview_item);
 }
 
 function updateItemPreview(file_key, content_type){
