@@ -8,13 +8,22 @@ function listPinned(){
 
 function buildListItem(file_key, pin_type){
   console.log("Key: "+file_key+" - Pin Type: "+pin_type);
+  var avail_content_types = {
+    "image": [
+      "jpeg",
+      "jpg",
+      "png",
+      "gif",
+      "bmp"
+    ] 
+  };
 
   $.ajax({
     type: 'GET',
     url: httpFileUrl(file_key),
     success: function(data, textstatus, request){
       var content_type_raw = request.getResponseHeader('Content-Type');
-
+      
       console.log(content_type_raw);
     }
   }); 
