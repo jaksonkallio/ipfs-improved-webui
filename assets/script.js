@@ -7,7 +7,7 @@ function listPinned(){
 }
 
 function buildListItem(file_key, pin_type){
-  console.log("Key: "+key+" - Pin Type: "+pin_type);
+  console.log("Key: "+file_key+" - Pin Type: "+pin_type);
 
   $.ajax({
     type: 'GET',
