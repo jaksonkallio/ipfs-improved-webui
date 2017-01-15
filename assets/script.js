@@ -57,13 +57,13 @@ function httpFileUrl(file_key){
 
 function dialogBox(content){
   $("#modal").html(content);
-  $("#focus-cover").setAttr('data-active', "true");
-  $("#modal").setAttr('data-active', "true");
+  $("#focus-cover").attr('data-active', "true");
+  $("#modal").attr('data-active', "true");
 }
 
 function closeDialogBox(){
-  $("#focus-cover").setAttr('data-active', "false");
-  $("#modal").setAttr('data-active', "false");
+  $("#focus-cover").attr('data-active', "false");
+  $("#modal").attr('data-active', "false");
   $("#modal").html('');
 }
 
