@@ -1,13 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
 #file-list {
   width:100%;
   padding:40px;
   font-size: 0px;
+  text-align: center;
 }
 #file-list .item {
   display: inline-block;
   font-size: 14px;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   position: relative;
   background: #a9ccd6;
   border-radius: 5px;
