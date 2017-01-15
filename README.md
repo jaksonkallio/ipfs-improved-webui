@@ -21,5 +21,5 @@ Navigate to the directory where you put the downloaded files in the URL box of y
 * Windows: `file:///D:\<path-to-downloaded-files>\pinhead\index.html`
 
 ## Tips
-BTC: 176yjaTEJm5eG6K9WRNpChntbZ5VDw5TBa
-ETH: 0xD4B1E6a0B8f52bcf8Cb3eA4f4E2D91AD31784E2e
+* BTC: 176yjaTEJm5eG6K9WRNpChntbZ5VDw5TBa
+* ETH: 0xD4B1E6a0B8f52bcf8Cb3eA4f4E2D91AD31784E2e
