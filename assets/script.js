@@ -16,8 +16,8 @@ function listPinned(){
 
 function buildListItem(file_key, pin_type){
   var preview_item = $(`
-    <div class="item" data-file-key="`+file_key+`">
-      <div class="thumbnail"></div>
+    <div class="item" data-file-key="`+file_key+`" data-preview-found="false">
+      <a href="`+httpFileUrl(file_key)+`"><div class="thumbnail"></div></a>
       <div class="details">Providers</div>
     </div>
   `);
@@ -60,9 +60,14 @@ function updateItemPreview(file_key){
       var content_type_raw = request.getResponseHeader('Content-Type');
       content_type_raw = content_type_raw.split('/');
       
+      content_type = "none";
+
       if(avail_content_types['image'].indexOf(content_type_raw[1]) > -1){
         $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
+        $('#file-list .item[data-file-key="'+file_key+'"]').attr("data-preview-found", "true");
         content_type = 'image';
+      }else{
+        $('#file-list .item[data-file-key="'+file_key+'"]').remove();
       }
       
       console.log(file_key+" is a(n) "+content_type);
