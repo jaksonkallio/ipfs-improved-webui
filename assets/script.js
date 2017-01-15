@@ -18,13 +18,12 @@ function buildListItem(file_key, pin_type){
   var preview_item = $(`
     <div class="item" data-file-key="`+file_key+`">
       <div class="thumbnail"></div>
-      <div class="details"></div>
+      <div class="details">Providers</div>
     </div>
   `);
 
   $("#file-list").append(preview_item);
 
-  countProviders(file_key, true);
   updateItemPreview(file_key);
 }
 
@@ -37,7 +36,7 @@ function countProviders(file_key, reload){
       countProviders(file_key, false);
     });
   }else{
-    $('#file-list .item[data-file-key="'+file_key+'"] .details').html(pin_cache[file_key]['providers']);
+    $('#file-list .item[data-file-key="'+file_key+'"] .details').html(pin_cache[file_key]['providers']+" providers");
   }
 }
 
@@ -51,6 +50,8 @@ function updateItemPreview(file_key){
       "bmp"
     ] 
   };
+  
+  var content_type;
 
   $.ajax({
     type: 'GET',
@@ -60,11 +61,11 @@ function updateItemPreview(file_key){
       content_type_raw = content_type_raw.split('/');
       
       if(avail_content_types['image'].indexOf(content_type_raw[1]) > -1){
-        if(content_type == 'image'){
-          $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
-          console.log(file_key+" is a(n) "+content_type);
-        }
+        $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
+        content_type = 'image';
       }
+      
+      console.log(file_key+" is a(n) "+content_type);
     }
   });
 }
@@ -95,13 +96,10 @@ function apiCall(endpoint, onComplete){
 $(document).ready(function(){
   listPinned();
 });
-$(document).on('click', "#file-list .item a.details", function(){
-  var provider_count = 0;
+$(document).on('click', "#file-list .item .details", function(){
   var file_key = $(this).closest('.item').data('file-key');
 
-  console.log("Loading file details for "+file_key);
-  
-  
+  countProviders(file_key, true);
 });
 $(document).on('click', "#focus-cover", function(){
   closeDialogBox();
