@@ -1,15 +1,47 @@
+var pin_cache = {};
+
 function listPinned(){
   $('#file-list').html('');
-  
+
   $.get("http://127.0.0.1:5001/api/v0/pin/ls", function(data){
     $.each(data.Keys, function(key, value){
+      pin_cache[key] = {
+        "type": data['Keys'][key]['Type'],
+        "providers": -1
+      };
       buildListItem(key, data['Keys'][key]['Type']);
     });
   });
 }
 
 function buildListItem(file_key, pin_type){
-  console.log("Key: "+file_key+" - Pin Type: "+pin_type);
+  var preview_item = $(`
+    <div class="item" data-file-key="`+file_key+`">
+      <div class="thumbnail"></div>
+      <div class="details"></div>
+    </div>
+  `);
+
+  $("#file-list").append(preview_item);
+
+  countProviders(file_key, true);
+  updateItemPreview(file_key);
+}
+
+function countProviders(file_key, reload){
+  if(reload){
+     apiCall("dht/findprovs?arg="+file_key, function(data){
+      var provider_count = data.split('{"Extra":').length-1; 
+      pin_cache[file_key]['providers'] = provider_count;
+      
+      countProviders(file_key, false);
+    });
+  }else{
+    $('#file-list .item[data-file-key="'+file_key+'"] .details').html(pin_cache[file_key]['providers']);
+  }
+}
+
+function updateItemPreview(file_key){
   var avail_content_types = {
     "image": [
       "jpeg",
@@ -28,27 +60,13 @@ function buildListItem(file_key, pin_type){
       content_type_raw = content_type_raw.split('/');
       
       if(avail_content_types['image'].indexOf(content_type_raw[1]) > -1){
-        updateItemPreview(file_key, 'image'); 
+        if(content_type == 'image'){
+          $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
+          console.log(file_key+" is a(n) "+content_type);
+        }
       }
     }
   });
-
-  var preview_item = $(`
-    <div class="item" data-file-key="`+file_key+`">
-      <div class="thumbnail"></div>
-      <a class="details">File Details</a>
-    </div>
-  `);
-
-  $("#file-list").append(preview_item);
-}
-
-function updateItemPreview(file_key, content_type){
-  console.log(file_key+" is a(n) "+content_type);
-
-  if(content_type == 'image'){
-    $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
-  }
 }
 
 function httpFileUrl(file_key){
@@ -82,10 +100,9 @@ $(document).on('click', "#file-list .item a.details", function(){
   var file_key = $(this).closest('.item').data('file-key');
 
   console.log("Loading file details for "+file_key);
-
-  apiCall("dht/findprovs?arg="+file_key, function(data){
-    provider_count = data.split('{"Extra":').length-1; 
-    
-    dialogBox('Provider Count: '+provider_count);
-  });
+  
+  
+});
+$(document).on('click', "#focus-cover", function(){
+  closeDialogBox();
 });

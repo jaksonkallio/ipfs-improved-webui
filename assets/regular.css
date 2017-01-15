@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
 * {
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'PT Sans', sans-serif;
 }
 
 #file-list {
@@ -82,6 +88,6 @@
   pointer-events: auto;
 }
 #focus-cover[data-active="true"] {
-  opacity: 0.6;
+  opacity: 1;
   pointer-events: auto;
 }
