@@ -28,8 +28,7 @@ function buildListItem(file_key, pin_type){
       content_type_raw = content_type_raw.split('/');
       
       if(avail_content_types['image'].indexOf(content_type_raw[1]) > -1){
-        updateItemPreview(file_key, 'image');
-      
+        updateItemPreview(file_key, 'image'); 
       }
     }
   });
@@ -46,10 +45,26 @@ function buildListItem(file_key, pin_type){
 
 function updateItemPreview(file_key, content_type){
   console.log(file_key+" is a(n) "+content_type);
+
+  if(content_type == 'image'){
+    $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
+  }
 }
 
 function httpFileUrl(file_key){
   return "http://localhost:8080/ipfs/"+file_key;
+}
+
+function dialogBox(content){
+  $("#modal").html(content);
+  $("#focus-cover").setAttr('data-active', "true");
+  $("#modal").setAttr('data-active', "true");
+}
+
+function closeDialogBox(){
+  $("#focus-cover").setAttr('data-active', "false");
+  $("#modal").setAttr('data-active', "false");
+  $("#modal").html('');
 }
 
 $(document).ready(function(){
