@@ -19,3 +19,6 @@ Keep in mind that this will allow any RPC call, from any HTTP source on the syst
 Navigate to the directory where you put the downloaded files in the URL box of your browser.
 * Linux (and probably Mac?): `/home/<username>/<path-to-downloaded-files>/pinhead/index.html`
 * Windows: `file:///D:\<path-to-downloaded-files>\pinhead\index.html`
+
+## Tips
+176yjaTEJm5eG6K9WRNpChntbZ5VDw5TBa
