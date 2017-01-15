@@ -1,4 +1,6 @@
 function listPinned(){
+  $('#file-list').html('');
+  
   $.get("http://127.0.0.1:5001/api/v0/pin/ls", function(data){
     $.each(data.Keys, function(key, value){
       buildListItem(key, data['Keys'][key]['Type']);
@@ -39,7 +41,6 @@ function buildListItem(file_key, pin_type){
     </div>
   `);
 
-  $("#file-list").html('');
   $("#file-list").append(preview_item);
 }
 
