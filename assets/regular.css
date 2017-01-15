@@ -21,7 +21,7 @@ body {
   height: 150px;
   position: relative;
   background: #a9ccd6;
-  border-radius: 5px;
+  border-radius: 10px;
   margin: 10px;
   cursor: pointer;
 }
@@ -31,6 +31,7 @@ body {
   height: 100%;
   left: 0px;
   top: 0px;
+  border-radius: 10px;
   background-color: transparent;
   background-size: cover;
   background-position: center center;
