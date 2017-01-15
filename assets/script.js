@@ -67,13 +67,25 @@ function closeDialogBox(){
   $("#modal").html('');
 }
 
+function apiCall(endpoint, onComplete){
+  $.get("http://127.0.0.1:5001/api/v0/"+endpoint).always(function(data){
+    onComplete(data.responseText);
+  });
+ 
+}
+
 $(document).ready(function(){
   listPinned();
-  /*$.ajax({
-    type: 'GET',
-    url: 'http://i.imgur.com/cx5wqZ3.jpg',
-    success: function(data, textStatus, request){
-      alert(request.getResponseHeader('Content-Type'));
-    }
-  });*/
+});
+$(document).on('click', "#file-list .item a.details", function(){
+  var provider_count = 0;
+  var file_key = $(this).closest('.item').data('file-key');
+
+  console.log("Loading file details for "+file_key);
+
+  apiCall("dht/findprovs?arg="+file_key, function(data){
+    provider_count = data.split('{"Extra":').length-1; 
+    
+    dialogBox('Provider Count: '+provider_count);
+  });
 });
