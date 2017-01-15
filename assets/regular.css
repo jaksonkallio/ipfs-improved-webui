@@ -38,11 +38,21 @@ body {
   overflow: hidden;
   transform: translateY(5px);
   opacity: 0;
-  transition: opacity 0.2s, transform 0.2s;
+  animation-name: SlideFadeUp;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in-out;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 }
-#file-list .item[data-preview-found="true"] {
-  transform: translateY(0px);
-  opacity: 1;
+@keyframes SlideFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
 #file-list .item .thumbnail {
   position: absolute;

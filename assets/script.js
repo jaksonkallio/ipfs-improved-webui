@@ -1,5 +1,7 @@
 var pin_cache = {};
 
+var loaded_image_counter = 0;
+
 function listPinned(){
   $('#file-list').html('');
 
@@ -9,22 +11,14 @@ function listPinned(){
         "type": data['Keys'][key]['Type'],
         "providers": -1
       };
-      buildListItem(key, data['Keys'][key]['Type']);
+      
+      updateItemPreview(key);
     });
   });
 }
 
-function buildListItem(file_key, pin_type){
-  var preview_item = $(`
-    <div class="item" data-file-key="`+file_key+`" data-preview-found="false">
-      <a href="`+httpFileUrl(file_key)+`"><div class="thumbnail"></div></a>
-      <div class="details">Providers</div>
-    </div>
-  `);
-
-  $("#file-list").append(preview_item);
-
-  updateItemPreview(file_key);
+function buildListItem(file_key){
+  
 }
 
 function countProviders(file_key, reload){
@@ -41,17 +35,13 @@ function countProviders(file_key, reload){
 }
 
 function updateItemPreview(file_key){
-  var avail_content_types = {
-    "image": [
-      "jpeg",
-      "jpg",
-      "png",
-      "gif",
-      "bmp"
-    ] 
-  };
-  
-  var content_type;
+  var image_types = [
+    "jpeg",
+    "jpg",
+    "png",
+    "gif",
+    "bmp"
+  ];
 
   $.ajax({
     type: 'GET',
@@ -59,18 +49,18 @@ function updateItemPreview(file_key){
     success: function(data, textstatus, request){
       var content_type_raw = request.getResponseHeader('Content-Type');
       content_type_raw = content_type_raw.split('/');
-      
-      content_type = "none";
 
-      if(avail_content_types['image'].indexOf(content_type_raw[1]) > -1){
-        $('#file-list .item[data-file-key="'+file_key+'"] .thumbnail').css('background-image', "url('"+httpFileUrl(file_key)+"')");
-        $('#file-list .item[data-file-key="'+file_key+'"]').attr("data-preview-found", "true");
-        content_type = 'image';
-      }else{
-        $('#file-list .item[data-file-key="'+file_key+'"]').remove();
+      if(image_types.indexOf(content_type_raw[1]) > -1){
+        loaded_image_counter++;        
+        
+        var preview_item = $(`
+          <div class="item" data-file-key="`+file_key+`" style="animation-delay:`+(loaded_image_counter*200)+`ms;" data-preview-found="false">
+            <a href="`+httpFileUrl(file_key)+`"><div class="thumbnail" style="background-image:url('`+httpFileUrl(file_key)+`');"></div></a>
+            <div class="details">Providers</div>
+          </div>
+        `);
+        $("#file-list").append(preview_item);
       }
-      
-      console.log(file_key+" is a(n) "+content_type);
     }
   });
 }
