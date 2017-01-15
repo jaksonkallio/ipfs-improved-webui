@@ -79,23 +79,10 @@ function httpFileUrl(file_key){
   return "http://localhost:8080/ipfs/"+file_key;
 }
 
-function dialogBox(content){
-  $("#modal").html(content);
-  $("#focus-cover").attr('data-active', "true");
-  $("#modal").attr('data-active', "true");
-}
-
-function closeDialogBox(){
-  $("#focus-cover").attr('data-active', "false");
-  $("#modal").attr('data-active', "false");
-  $("#modal").html('');
-}
-
 function apiCall(endpoint, onComplete){
   $.get("http://127.0.0.1:5001/api/v0/"+endpoint).always(function(data){
     onComplete(data.responseText);
   });
- 
 }
 
 $(document).ready(function(){
@@ -105,7 +92,4 @@ $(document).on('click', "#file-list .item .details", function(){
   var file_key = $(this).closest('.item').data('file-key');
 
   countProviders(file_key, true);
-});
-$(document).on('click', "#focus-cover", function(){
-  closeDialogBox();
 });
