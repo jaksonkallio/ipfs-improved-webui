@@ -55,7 +55,7 @@ function updateItemPreview(file_key){
         
         var preview_item = $(`
           <div class="item" data-file-key="`+file_key+`" style="animation-delay:`+(loaded_image_counter*200)+`ms;" data-preview-found="false">
-            <a href="`+httpFileUrl(file_key)+`"><div class="thumbnail" style="background-image:url('`+httpFileUrl(file_key)+`');"></div></a>
+            <a href="`+httpFileUrl(file_key)+`" target="_BLANK"><div class="thumbnail" style="background-image:url('`+httpFileUrl(file_key)+`');"></div></a>
             <div class="details">Providers</div>
           </div>
         `);
