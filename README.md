@@ -1,11 +1,9 @@
 # Pinhead
-Help run the distributed web! A UI for IPFS pinning.
-
 This is a rough little application I built out of curiosity about IPFS and to play around with the API.
 
 Runs completely in the browser locally. (No install required)
 
-Currently only capable of viewing images.
+Maybe I'll keep working on this project to support other file types and the ability to pin/remove-pin from within the app.
 
 ## Setup
 1. Download/extract the project ZIP file wherever
