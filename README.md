@@ -1,3 +1,5 @@
+![Pinhead Preview](http://i.imgur.com/kxDj7af.png)
+
 # Pinhead
 This is a rough little application I built out of curiosity about IPFS and to play around with the API.
 
