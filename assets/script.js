@@ -1,7 +1,5 @@
 var pin_cache = {};
 
-var loaded_image_counter = 0;
-
 function listPinned(){
   $('#file-list').html('');
 
@@ -15,10 +13,6 @@ function listPinned(){
       updateItemPreview(key);
     });
   });
-}
-
-function buildListItem(file_key){
-  
 }
 
 function countProviders(file_key, reload){
@@ -51,10 +45,9 @@ function updateItemPreview(file_key){
       content_type_raw = content_type_raw.split('/');
 
       if(image_types.indexOf(content_type_raw[1]) > -1){
-        loaded_image_counter++;        
         
         var preview_item = $(`
-          <div class="item" data-file-key="`+file_key+`" style="animation-delay:`+(loaded_image_counter*200)+`ms;" data-preview-found="false">
+          <div class="item" data-file-key="`+file_key+`">
             <a href="`+httpFileUrl(file_key)+`" target="_BLANK"><div class="thumbnail" style="background-image:url('`+httpFileUrl(file_key)+`');"></div></a>
             <div class="details">Providers</div>
           </div>
