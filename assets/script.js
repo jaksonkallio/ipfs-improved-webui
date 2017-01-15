@@ -5,7 +5,7 @@ var loaded_image_counter = 0;
 function listPinned(){
   $('#file-list').html('');
 
-  $.get("http://127.0.0.1:5001/api/v0/pin/ls", function(data){
+  $.get("http://127.0.0.1:5001/api/v0/pin/ls?type=recursive", function(data){
     $.each(data.Keys, function(key, value){
       pin_cache[key] = {
         "type": data['Keys'][key]['Type'],
