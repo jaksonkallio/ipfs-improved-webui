@@ -7,6 +7,9 @@ Runs in the browser locally. (No install required)
 
 Maybe I'll keep working on this project to support other file types and the ability to pin/remove-pin from within the app.
 
+## Warning!!
+Do NOT use if you've pinned large files or have pinned a lot of files! Unfortunately, until I can figure out a different way, Pinhead downloads and checks the MIME type of EVERY file you've pinned to check for images! I haven't tested limits, but it's probably not a good idea if you've pinned more than a total of ~100 MB worth of files.
+
 ## Setup
 1. Download/extract the project ZIP file wherever
 2. In order for Pinhead to work, the access control on your IPFS install needs to be opened up. You can do this by running these commands:
